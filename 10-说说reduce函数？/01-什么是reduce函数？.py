@@ -1,3 +1,4 @@
+import math
 import operator
 # reduce（） 函数是functools模块中的一个函数，他对可迭代对象中的元素执行累积操作。
 # 与map（）和filter（）不同，reduce（）不包含在python的内置函数中，因此你必须从functools模块导入它才能使用
@@ -40,3 +41,20 @@ print(joined_string)
 
 
 # 连接嵌套列表
+# reduce() 可以用来扁平化嵌套列表
+neste_list = [[1,2],[3,4],[5]]
+flat_list = reduce(lambda x,y:x+y,neste_list)
+print(flat_list)
+
+
+
+# 执行复杂的累计操作
+# 你可以使用reduce（）来执行更复杂的累计操作，例如计算平均值、几何平均数等。
+numbers4 = [1,2,3,4,5]
+average = reduce(lambda x,y:x+y,numbers4)/len(numbers4)
+geometric_mean = math.exp(reduce(lambda x,y:x+math.log(y),numbers4,0.0) / len(numbers4))
+print(average)
+print(geometric_mean)
+
+# reduce() 函数在空列表上没有定义，如果你的列表可能为空，记得检查或提供一个初始化值。
+# 在使用reduce（）时，确保你的累积函数是“结合律”的，也就是说对于任何a,b,c函数应该满足f（a,f(b,c)）==f(f(a,b),c).
