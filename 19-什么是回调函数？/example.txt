@@ -1,0 +1,25 @@
+import os
+import shutil
+
+def organize_files(base_folder):
+    for root, dirs, files in os.walk(base_folder):
+        for file in files:
+            if file.endswith('.png') or file.endswith('.asc'):
+                # 获取文件的前十个字符作为文件夹名称
+                folder_name = file[:12]
+                # 目标文件夹路径
+                target_folder = os.path.join(base_folder, folder_name)
+                if not os.path.exists(target_folder):
+                    os.makedirs(target_folder)
+                # 移动文件到目标文件夹
+                source_file = os.path.join(root, file)
+                target_file = os.path.join(target_folder, file)
+                shutil.move(source_file, target_file)
+
+def main():
+    # 在这里指定你的一级文件夹路径
+    base_folder = 'Screenshots'  # 请根据你的需求修改此路径
+    organize_files(base_folder)
+
+if __name__ == '__main__':
+    main()
